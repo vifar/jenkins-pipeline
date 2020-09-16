@@ -37,12 +37,12 @@ def helmDeploy(Map args) {
     if (args.dry_run) {
         println "Running dry-run deployment"
 
-        sh "helm install --namespace ${namespace} -f ${args.values_file} --dry-run --debug ${args.name} ${args.chart_dir}"
+        sh "helm install --namespace ${namespace} -f helm/${args.values_file}-${env.BRANCH_NAME}.yaml --dry-run --debug ${args.name} ${args.chart_dir}"
     } else {
         println "Running deployment"
 
         //sh "helm dependency update ${args.chart_dir}"
-        sh "helm upgrade  --namespace ${namespace} --install ${args.name} ${args.chart_dir}"
+        sh "helm upgrade --namespace ${namespace} -f helm/${args.values_file}-${env.BRANCH_NAME}.yaml  --install ${args.name} ${args.chart_dir}"
 
         echo "Application ${args.name} successfully deployed. Use helm status ${args.name} to check"
 
