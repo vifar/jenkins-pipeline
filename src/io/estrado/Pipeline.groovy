@@ -5,7 +5,6 @@ def kubectlTest() {
     // Test that kubectl can correctly communication with the Kubernetes API
     println "checking kubectl connnectivity to the API"
     sh "kubectl get nodes"
-
 }
 
 def helmLint(String chart_dir) {
@@ -17,8 +16,6 @@ def helmLint(String chart_dir) {
 
 def helmConfig() {
     //setup helm connectivity to Kubernetes API and Tiller
-    println "initiliazing helm client"
-    sh "helm init"
     println "checking client/server version"
     sh "helm version"
 }
