@@ -20,17 +20,6 @@ def helmConfig() {
     sh "helm version"
 }
 
-def doConfig() {
-    //setup digital ocean connectivity
-    println "checking client/server version"
-    sh "doctl version"
-    println "log into digital ocean"
-    sh "doctl auth init --context ${env.DIGITAL_OCEAN_ACCESS_TOKEN}"
-    println "verify login was successful"
-    sh "doctl account get"
-
-}
-
 def helmDeploy(Map args) {
     
     //configure helm client
@@ -48,12 +37,12 @@ def helmDeploy(Map args) {
     if (args.dry_run) {
         println "Running dry-run deployment"
 
-        sh "helm install --namespace ${args.namespace} -f helm/${args.values_file}-${namespace}.yaml --dry-run --debug ${args.name}-${args.namespace} ${args.name}"
+        sh "helm install -f helm/values-${namespace}.yaml --dry-run --debug ${args.name} --generate-name"
     } else {
         println "Running deployment"
 
         //sh "helm dependency update ${args.chart_dir}"
-        sh "helm upgrade --namespace ${args.namespace} -f helm/${args.values_file}-${namespace}.yaml --install ${args.name}-${args.namespace} ${args.name}"
+        sh "helm upgrade --namespace ${args.namespace} -f helm/values-${namespace}.yaml --install ${args.name}-${args.namespace} ${args.name}"
 
         echo "Application ${args.name} successfully deployed. Use helm status ${args.name} to check"
 
