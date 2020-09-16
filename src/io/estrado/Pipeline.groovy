@@ -27,7 +27,11 @@ def doConfig() {
 }
 
 def helmDeploy(Map args) {
-    //configure helm client and confirm tiller process is installed
+    
+    //configure digital ocean client
+    doConfig()
+    
+    //configure helm client
     helmConfig()
 
     def String namespace
