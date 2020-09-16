@@ -53,7 +53,7 @@ def helmDeploy(Map args) {
         println "Running deployment"
 
         //sh "helm dependency update ${args.chart_dir}"
-        sh "helm upgrade --namespace ${namespace} -f helm/${args.values_file}-${env.namespace}.yaml  --install ${args.name}-${env.namespace} ${args.name"
+        sh "helm upgrade --namespace ${namespace} -f helm/${args.values_file}-${env.namespace}.yaml  --install ${args.name}-${env.namespace} ${args.name}"
 
         echo "Application ${args.name} successfully deployed. Use helm status ${args.name} to check"
 
