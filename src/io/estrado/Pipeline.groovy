@@ -20,6 +20,11 @@ def helmConfig() {
     sh "helm version"
 }
 
+def doConfig() {
+    //setup digital ocean connectivity
+    println "login digital ocean"
+    sh "doctl auth init --context ${env.DIGITAL_OCEAN_ACCESS_TOKEN}"
+}
 
 def helmDeploy(Map args) {
     //configure helm client and confirm tiller process is installed
