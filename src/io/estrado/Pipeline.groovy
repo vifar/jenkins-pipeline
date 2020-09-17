@@ -37,7 +37,7 @@ def helmDeploy(Map args) {
     if (args.dry_run) {
         println "Running dry-run deployment"
 
-        sh "helm install -f https://github.com/microapi-io/deploy-microapi-k8/${args.name}/helm/${args.name}/values-${namespace}.yaml --dry-run --debug ${args.name} --generate-name"
+        sh "helm install -f ${args.name}/values-${namespace}.yaml --dry-run --debug ${args.name} --generate-name"
     } else {
         println "Running deployment"
 
