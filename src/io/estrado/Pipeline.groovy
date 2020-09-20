@@ -18,6 +18,7 @@ def helmConfig() {
     //setup helm connectivity to Kubernetes API and Tiller
     println "checking client/server version"
     sh "helm version"
+    sh "helm list --all-namespaces"
 }
 
 def helmDeploy(Map args) {
@@ -37,7 +38,7 @@ def helmDeploy(Map args) {
     if (args.dry_run) {
         println "Running dry-run deployment"
 
-        sh "helm upgrade ${args.name} ${args.name}-${namespace} --set rbac.clusterAdminRole=true --install --force --namespace ${namespace} -f ${args.name}/values-${namespace}.yaml --dry-run --debug"
+        sh "helm upgrade ${args.name} ${args.name}-${namespace} --install --force --namespace ${namespace} -f ${args.name}/values-${namespace}.yaml --dry-run --debug"
     } else {
         println "Running deployment"
 
