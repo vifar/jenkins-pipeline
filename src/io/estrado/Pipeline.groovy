@@ -18,7 +18,6 @@ def helmConfig() {
     //setup helm connectivity to Kubernetes API and Tiller
     println "checking client/server version"
     sh "helm version"
-    sh "helm list --all-namespaces"
 }
 
 def helmDeploy(Map args) {
