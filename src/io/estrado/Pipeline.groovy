@@ -37,7 +37,7 @@ def helmDeploy(Map args) {
     if (args.dry_run) {
         println "Running dry-run deployment"
 
-        sh "helm upgrade --install --force --namespace ${namespace} -f ${args.name}/values-${namespace}.yaml --dry-run --debug ${args.name} --generate-name"
+        sh "helm upgrade ${args.name} ${args.name}-${namespace} --install --force --namespace ${namespace} -f ${args.name}/values-${namespace}.yaml --dry-run --debug "
     } else {
         println "Running deployment"
 
